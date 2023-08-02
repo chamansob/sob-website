@@ -1,0 +1,16 @@
+Options -Multiviews
+RewriteEngine On
+
+
+RewriteCond %{HTTP_HOST} ^[^.]+\.[^.]+$
+RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [L,R=301]
+
+RewriteRule ^(.*).html$ $1.php 
+
+RewriteRule ^([a-zA-Z_-]+)/(.*)$ index.php?model=$1&id=$2 [L]
+RewriteCond %{THE_REQUEST} \?
+RewriteCond %{QUERY_STRING} id=([0-9]+)
+RewriteRule ^$ /index.php%1? [R=301,L]
+RewriteRule ^([a-zA-Z_-]+)$ index.php?model=$1 [L]
+
+ErrorDocument 404 /404.html

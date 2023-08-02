@@ -92,7 +92,9 @@ $(document).ready(function()
 
     //email validiation
 
-    var email = $('#mail-email').val();
+  var email = $('#mail-email').val();
+ 
+  var website1 = $('#website1').val();
     var re = /^\w+([-+.'][^\s]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
     var emailFormat = re.test(email);
 

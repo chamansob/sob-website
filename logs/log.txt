@@ -1,3 +1,1 @@
-20-07-2023 11:03:46 AM | Logs Cleared: by User ID : 1
-01-08-2023 07:47:29 PM | Login: admin logged in.
-02-08-2023 11:20:59 AM | Login: admin logged in.
+02-08-2023 05:12:46 PM | Logs Cleared: by User ID : 1
