@@ -1,0 +1,35 @@
+Options -Multiviews
+RewriteEngine On
+RewriteRule ^includes/?$ - [F,L]
+RewriteRule ^public/?$ - [F,L]
+RewriteRule ^logs/?$ - [F,L]
+RewriteRule ^assets/?$ - [F,L]
+RewriteRule ^front_layouts/?$ - [F,L]
+
+
+RewriteCond %{HTTP_HOST} ^[^.]+\.[^.]+$
+RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [L,R=301]
+
+RewriteRule ^(.*).html$ $1.php 
+
+
+
+
+RewriteRule ^contact-us$ contact-us.php [L]
+RewriteRule ^portfolio$ portfolio.php [L]
+RewriteRule ^blog$ blog.php [L]
+RewriteRule ^services$ services.php [L]
+RewriteRule ^blog/(.*)$ blogdetails.php?slug=$1 [L]
+RewriteRule ^service/(.*)$ servicesdetails.php?slug=$1 [L]
+RewriteRule ^cta$ cta.php [L]
+RewriteRule ^cta-one$ cta2.php [L]
+RewriteRule ^cta-two$ cta3.php [L]
+RewriteRule ^faqs$ faqs.php [L]
+
+RewriteRule ^([^/.]+)_([^/.]+)/?$ page.php?sid=$1&page=$2 [L]
+RewriteCond %{THE_REQUEST} \?
+RewriteCond %{QUERY_STRING} id=([0-9]+)
+RewriteRule ^$ /page.php%1? [R=301,L]
+RewriteRule ^([a-zA-Z_-]+)$ page.php?id=$1 [L]
+ErrorDocument 404 /404.html
+
