@@ -15,10 +15,12 @@ $article_modified_time = '';
 $google_site_verification = '';
 $og_image = '';
 $og_image_alt = '';
+
 if (isset($_GET['id'])) {
+	
     $menu_name4 = htmlentities($_GET['id']);
     $rws = Menu::where("url", $menu_name4)->count();
-    if ($rws == 1) {
+	 if ($rws == 1) {
         if (!is_numeric($menu_name4)) {
             $rw = Menu::where("url", $menu_name4)->first();
             $che = Page::where("mid", $rw->id)->count();
@@ -38,8 +40,7 @@ if (isset($_GET['id'])) {
                 $og_url = empty($cms->og_url) ? $template->og_url : $cms->og_url;
                 $og_site_name = empty($cms->og_site_name) ? $template->og_site_name : $cms->og_site_name;
                 $article_modified_time = $template->article_modified_time;
-                $og_image =  empty($cms->og_image) ? $template->og_image : $cms->og_image;
-                $cms->og_image;
+                $og_image =  empty($cms->og_image) ? $template->og_image : $cms->og_image;               ;
                 $og_image_alt = empty($cms->og_image_alt) ? $template->og_image_alt : $cms->og_image_alt;
             }
         } else {
@@ -47,7 +48,7 @@ if (isset($_GET['id'])) {
     }
 } elseif (isset($_GET['slug'])) {
 
-    $blog = Blog::where('status', 0)->where('blog_slug', $_GET['slug'])->first();
+	$blog = Blog::where('status', 0)->where('blog_slug', $_GET['slug'])->first();
     if ($blog != null) {
         $title = $blog->meta_title;
         $des = $blog->meta_description;
@@ -55,9 +56,21 @@ if (isset($_GET['id'])) {
     }
     $service = Services::where('status', 0)->where('service_slug', $_GET['slug'])->first();
     if ($service != null) {
+		
         $title = $service->meta_title;
         $des = $service->meta_description;
         $key = $service->meta_keywords;
+		$og_locale = empty($service->og_locale) ? $template->og_locale : $cms->og_locale;
+        $og_type = empty($service->og_type) ? $template->og_type : $service->og_type;
+        $og_title = empty($service->og_title) ? $template->og_title : $service->og_title;
+        $og_description = empty($service->og_description) ? $service->og_description : $service->og_description;
+
+        $og_url = empty($service->og_url) ? $template->og_url : $service->og_url;
+        $og_site_name = empty($service->og_site_name) ? $template->og_site_name : $service->og_site_name;
+        $article_modified_time = $template->article_modified_time;
+        $og_image =  empty($service->og_image) ? $template->og_image : $service->og_image;
+                
+        $og_image_alt = empty($service->og_image_alt) ? $template->og_image_alt : $service->og_image_alt;
     }
 
     if ($blog == null && $service == null && $menu == null) {
@@ -66,23 +79,32 @@ if (isset($_GET['id'])) {
         $des = $site->meta_description;
         $key = $site->meta_keywords;
     }
+} elseif(isset($_SERVER['REQUEST_URI']) && $_SERVER['REQUEST_URI']!= DS.MYF) {
+    
+	$url=explode(DS . MYF,$_SERVER['REQUEST_URI']);   
+   print_r($url);
+    $rw = Menu::where("url", $url[1])->first();
+    
+     $che = Page::where("mid", $rw->id)->count();
+   if ($che != 0) {
+        $cms = Page::where("mid", $rw->id)->first();
+        $title = $cms->title;
+        $des = $cms->meta_description;
+        $key = $cms->meta_keywords;
+        $canonical = $cms->canonical;
+        $analytics = $template->analytics;
+        $og_locale = empty($cms->og_locale) ? $template->og_locale : $cms->og_locale;
+        $og_type = empty($cms->og_type) ? $template->og_type : $cms->og_type;
+        $og_title = empty($cms->og_title) ? $template->og_title : $cms->og_title;
+        $og_description = empty($cms->og_description) ? $template->og_description : $cms->og_description;
 
-    $analytics = $template->analytics;
-    $canonical = $template->canonical;
+        $og_url = empty($cms->og_url) ? $template->og_url : $cms->og_url;
+        $og_site_name = empty($cms->og_site_name) ? $template->og_site_name : $cms->og_site_name;
+        $article_modified_time = $template->article_modified_time;
+        $og_image =  empty($cms->og_image) ? $template->og_image : $cms->og_image;;
+        $og_image_alt = empty($cms->og_image_alt) ? $template->og_image_alt : $cms->og_image_alt;
+   }
 
-    $og_locale = $template->og_locale;
-    $og_type = $template->og_type;
-    $og_locale = empty($template->og_locale) ? $template->og_locale : $template->og_locale;
-    $og_type = empty($template->og_type) ? $template->og_type : $template->og_type;
-    $og_title = empty($template->og_title) ? $template->og_title : $template->og_title;
-    $og_description = empty($template->og_description) ? $template->og_description : $template->og_description;
-
-    $og_url = empty($template->og_url) ? $template->og_url : $template->og_url;
-    $og_site_name = empty($template->og_site_name) ? $template->og_site_name : $template->og_site_name;
-    $article_modified_time = $template->article_modified_time;
-    $og_image =  empty($template->og_image) ? $template->og_image : $template->og_image;
-    $template->og_image;
-    $og_image_alt = empty($template->og_image_alt) ? $template->og_image_alt : $template->og_image_alt;
 } else {
     $site = $template;
     $title = $site->sitename;
@@ -102,19 +124,12 @@ if (isset($_GET['id'])) {
     $og_image_alt = $site->og_image_alt;
 }
 
-if (str_contains($_SERVER['REQUEST_URI'], 'portfolio')) {
-    $page = Page::where("mid", 3)->first();
-    if ($page != null) {
-        $title = $page->title;
-        $des = $page->meta_description;
-        $key = $page->meta_keywords;
-    }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+
     <?php include("meta.php"); ?>
     <!-- Stylesheets -->
     <link rel="preconnect" href="https://fonts.gstatic.com/">
@@ -139,21 +154,17 @@ if (str_contains($_SERVER['REQUEST_URI'], 'portfolio')) {
     <!-- Color css -->
     <link rel="stylesheet" id="jssDefault" href="<?= BASE_PATH ?>asstes/css/colors/color-default.css">
 
-    <link rel="shortcut icon" href="images/favicon.png" id="fav-shortcut" type="image/x-icon">
-    <link rel="icon" href="images/favicon.png" id="fav-icon" type="image/x-icon">
+   
 
 </head>
 
 <body class="body-dark">
 
     <div class="page-wrapper">
-
-
         <!-- Preloader -->
         <div class="preloader">
             <div class="icon"></div>
         </div>
-
         <!-- Main Header -->
         <header class="main-header header-style-one">
 

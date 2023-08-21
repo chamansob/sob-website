@@ -103,7 +103,8 @@
 
  </div>
  <!--End pagewrapper-->
-
+<!-- Whatsup Bottom -->
+ <div id="myButton"></div>
  <a href="#" data-target="html" class="scroll-to-target scroll-to-top"><i class="fa fa-angle-up"></i></a>
 
 
@@ -125,6 +126,27 @@
  <script src="<?= BASE_PATH ?>asstes/js/jquery.easing.min.js"></script>
  <script src="<?= BASE_PATH ?>asstes/js/custom-script.js"></script>
 
+	<!-- Whatsup js -->
+   <script type="text/javascript" src="<?= BASE_PATH ?>asstes/whatsup/floating-wpp.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $('#myButton').floatingWhatsApp({
+            phone: '<?= Module::where('status', 0)->where('id', 6)->first()->small_text ?>',
+            popupMessage: 'Hello, how can we help you?',
+            message: "",
+            showPopup: true,
+            position:'left',			
+			showOnIE:true,
+			autoOpenTimer: 0,
+			headerColor:'#009688',
+			zIndex: 999999,
+            headerTitle: 'Welcome to SEO Out The Box',
+            backgroundColor:'crimson',
+            buttonImage: '<img src="<?= BASE_PATH ?>asstes/whatsup/whatsapp.svg" />'
+        });
+    });
+</script>
 
 
  </body>

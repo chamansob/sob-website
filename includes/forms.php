@@ -842,4 +842,25 @@ CKEDITOR.replace( '" . $idname . "', {
         $x .= '</div></div>';
         return $x;
     }
+    public static function upload_file($lable, $name, $image)
+    {
+       
+        $x = '<div class="form-group row mb-4">
+								<label for="exampleInputFile" class="col-xl-' . self::$wtlable . ' col-sm-4 col-md-' . self::$wtlable . ' col-form-label">' . $lable . ':</label>
+<div class="col-xl-' . self::$wtform . ' col-lg-9 col-md-' . self::$wtform . '">';
+        if (file_exists($_SERVER['DOCUMENT_ROOT'] . "/" . MYF  . $image)) {
+            if ($image != '') {
+                $x .= '<div style="width:150px">
+		<strong class="text-info fw-bolder">File Name:</strong>'.$image. '</div>
+                  ';
+            }
+        } else {
+            $x .= "<div class='pb-3'>No File Found</div>";
+        }
+        $x .= '
+			<div class="col-xl-' . self::$wtform . ' col-lg-9 col-md-' . self::$wtform . '">   <input type="file" name="' . $name . '" accept="image/png, image/jpeg, image/gif"  class="form-control-file" id="exampleFormControlFile1"></div>
+
+							</div></div>';
+        return $x;
+    }
 }

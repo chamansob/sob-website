@@ -5,7 +5,7 @@
             <div class="shape-2 wow fadeInDown" data-wow-delay="0ms" data-wow-duration="1500ms"></div>
             <h2>Let's Get Your Project <br>Started!</h2>
             <div class="link-box">
-                <a class="theme-btn btn-style-two" href="about.html">
+                <a class="theme-btn btn-style-two" href="<?=BASE_PATH?>contact-us">
                     <i class="btn-curve"></i>
                     <span class="btn-title">Contact with us</span>
                 </a>

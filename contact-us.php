@@ -1,10 +1,22 @@
 <?php
 include("includes/initialize.php");
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 include_layout_web('header.php');
-if (isset($_POST['submit_contact'])) {
-    $temp = Template::find_by_id(1);
+?>
+<script src="https://www.google.com/recaptcha/api.js"></script>
+ <script>
+   function onSubmit(token) {
+     document.getElementById("contact-form").submit();
+   }
+ </script>
+<?php
+if (isset($_POST['submit'])) {
+	
+    $temp = Template::find(1);
     extract($_POST);
-    $name = $fname;
+    $name = $cname;
     $email = $cemail;
     $phone = $cphone;
     $country = $country;
@@ -16,7 +28,7 @@ if (isset($_POST['submit_contact'])) {
 
     $to = $temp->email;
 
-    $subjects = "Business Enquiry Through " . $temp->sitename . " !!";
+    $subject = "Business Enquiry Through " . $temp->sitename . " !!";
 
 
     $strMessage = '<table width="100%" border="0" cellspacing="0" cellpadding="10" style="border-collapse:collapse" class="table">
@@ -77,19 +89,21 @@ if (isset($_POST['submit_contact'])) {
 															  </tr>
 														</tbody>
                                 </table>';
-
-    $to_name = "magic byte solutions";
+	$body= file_get_contents($strMessage);
+    $from = "info@seooutofthebox.com";
+    $to_name = "SOB Out The box";
+	$from_name ="SOB Enquiry";
     $to = $temp->email;
 
-    $from = "info@seooutofthebox.com";
-    $subject = $subjects;
-    //$subject = "Mail Test at ".strftime("%T", time());
-    $message = "This is a testing From vps Server Test Site";
-    $message = wordwrap($message, 70);
+   
+    $subject = $subject;
+    
+   
+   
     $from_name = $name;
     // PHPMailer's Object-oriented approach	
 
-    $mail = new PHPMailer();
+    $mail = new PHPMailer(true);
     // $mail->IsSMTP();
     // $mail->SMTPSecure = false;
     // $mail->SMTPAutoTLS = false;
@@ -97,14 +111,17 @@ if (isset($_POST['submit_contact'])) {
     // $mail->Port     = 25;
     //$mail->SMTPDebug  = 2; 
 
-    $mail->FromName = $from_name;
-    $mail->From     = $from;
-    $mail->AddAddress($to, $to_name);
+    //$mail->FromName = $from_name;
+   // $mail->From     = $from;
+	$mail->SetFrom($from, $from_name);
+    $mail->addAddress($to, $to_name);
+    
+	
+     //Content
+    $mail->isHTML(true);   //Set email format to HTML
     $mail->Subject  = $subject;
-    $mail->IsHTML(true);
-    $mail->Body     = $strMessage;
-
-    //$mailit = $mail->Send();
+    $mail->Body    = $strMessage;
+    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
     $result = $mail->Send();
 
     if ($result) {
@@ -140,7 +157,7 @@ if (isset($_POST['submit_contact'])) {
 
 
 <section class="page-banner">
-    <div class="image-layer" style="background-image:url(<?= BASE_PATH ?>asstes/images/background/image-7.jpg);"></div>
+    <div class="image-layer" style="background-image:url(<?= BASE_PATH ?>asstes/images/background/image-7.webp);"></div>
     <div class="shape-1"></div>
     <div class="shape-2"></div>
     <div class="banner-inner">
@@ -252,10 +269,12 @@ if (isset($_POST['submit_contact'])) {
                                     </div>
                                 </div>
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                                    <button type="submit" class="theme-btn btn-style-one" name="submit">
-                                        <i class="btn-curve"></i>
-                                        <span class="btn-title">Send message</span>
-                                    </button>
+								<button type="submit" class="g-recaptcha theme-btn btn-style-one"  name="submit"
+        data-sitekey="6LfvIO8lAAAAAHilXbT3ITD8YHI2O7vmSDBnjacj" 
+        data-callback='onSubmit' 
+        data-action='submit'> <i class="btn-curve"></i>
+                                        <span class="btn-title">Send message</span></button>
+                                   
                                 </div>
                             </div>
                         </form>

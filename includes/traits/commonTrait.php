@@ -106,7 +106,7 @@ trait CommonTrait
 
               $.post("<?= TP_BACK ?>resources<?= DS ?>ajax_delete.php", {
                 id: id,
-                table: '<?= strtolower($_GET['pname']) ?>'
+                table: '<?= strtolower(isset($_GET['pname'])) ?>'
               }, function(data) {
                 window.location = '';
               });

@@ -21,7 +21,7 @@ if ($rws != null && $che != 0) {
 ?>
     <!-- Banner Section -->
     <section class="page-banner">
-        <div class="image-layer" style="background-image:url(<?= BASE_PATH ?>asstes/images/background/image-7.jpg);"></div>
+        <div class="image-layer" style="background-image:url(<?= BASE_PATH ?>asstes/images/background/image-7.webp);"></div>
         <div class="shape-1"></div>
         <div class="shape-2"></div>
         <div class="banner-inner">
@@ -65,7 +65,8 @@ if ($rws != null && $che != 0) {
     redirect_to(BASE_PATH);
 } ?>
 <!-- Testimonial Section -->
-<?php include_layout_web('home/testimonial.php'); ?>
+<?php include_layout_web('home/testimonial.php');
+include_layout_web('home/call.php'); ?>
 <?php
 include_layout_web('footer.php');
 ?>

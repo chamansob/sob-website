@@ -4,7 +4,8 @@
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
-use Intervention\Image\ImageManager;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 
 class Template extends Model
 {
@@ -24,47 +25,41 @@ class Template extends Model
 	{
 
 ?>
-
-		<script type="text/javascript" charset="utf-8">
-			// Documentation for client options:
-			// https://github.com/Studio-42/elFinder/wiki/Client-configuration-options
-			$(document).ready(function() {
-
-				$('#cache_time').datepicker({
-					dateFormat: "dd/mm/yy"
-				})
-				$('#elfinder').elfinder(
-					// 1st Arg - options
-					{
-						cssAutoLoad: false, // Disable CSS auto loading
-						baseUrl: './', // Base URL to css/*, js/*
-						url: '<?= TP_BACK ?>elfinder/php/connector.minimal.php' // connector URL (REQUIRED)
-						// , lang: 'ru'                    // language (OPTIONAL)
-					},
-					// 2nd Arg - before boot up function
-					function(fm, extraObj) {
-						// `init` event callback function
-						fm.bind('init', function() {
-							// Optional for Japanese decoder "encoding-japanese.js"
-							if (fm.lang === 'ja') {
-								fm.loadScript(
-									['//cdn.rawgit.com/polygonplanet/encoding.js/1.0.26/encoding.min.js'],
-									function() {
-										if (window.Encoding && Encoding.convert) {
-											fm.registRawStringDecoder(function(s) {
-												return Encoding.convert(s, {
-													to: 'UNICODE',
-													type: 'string'
-												});
-											});
-										}
-									}, {
-										loadType: 'tag'
-									}
-								);
+		<script>
+			define('elFinderConfig', {
+				// elFinder options (REQUIRED)
+				// Documentation for client options:
+				// https://github.com/Studio-42/elFinder/wiki/Client-configuration-options
+				defaultOpts: {
+					url: '<?= TP_BACK ?>elfinder/php/connector.minimal.php', // or connector.maximal.php : connector URL (REQUIRED)
+					commandsOptions: {
+						edit: {
+							extraOptions: {
+								// set API key to enable Creative Cloud image editor
+								// see https://console.adobe.io/
+								creativeCloudApiKey: '',
+								// browsing manager URL for CKEditor, TinyMCE
+								// uses self location with the empty value
+								managerUrl: ''
 							}
+						},
+						quicklook: {
+							// to enable CAD-Files and 3D-Models preview with sharecad.org
+							sharecadMimes: ['image/vnd.dwg', 'image/vnd.dxf', 'model/vnd.dwf', 'application/vnd.hp-hpgl', 'application/plt', 'application/step', 'model/iges', 'application/vnd.ms-pki.stl', 'application/sat', 'image/cgm', 'application/x-msmetafile'],
+							// to enable preview with Google Docs Viewer
+							googleDocsMimes: ['application/pdf', 'image/tiff', 'application/vnd.ms-office', 'application/msword', 'application/vnd.ms-word', 'application/vnd.ms-excel', 'application/vnd.ms-powerpoint', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.openxmlformats-officedocument.presentationml.presentation', 'application/postscript', 'application/rtf'],
+							// to enable preview with Microsoft Office Online Viewer
+							// these MIME types override "googleDocsMimes"
+							officeOnlineMimes: ['application/vnd.ms-office', 'application/msword', 'application/vnd.ms-word', 'application/vnd.ms-excel', 'application/vnd.ms-powerpoint', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.openxmlformats-officedocument.presentationml.presentation', 'application/vnd.oasis.opendocument.text', 'application/vnd.oasis.opendocument.spreadsheet', 'application/vnd.oasis.opendocument.presentation']
+						}
+					},
+					// bootCalback calls at before elFinder boot up 
+					bootCallback: function(fm, extraObj) {
+						/* any bind functions etc. */
+						fm.bind('init', function() {
+							// any your code
 						});
-						// Optional for set document.title dynamically.
+						// for example set document.title dynamically.
 						var title = document.title;
 						fm.bind('open', function() {
 							var path = '',
@@ -77,9 +72,15 @@ class Template extends Model
 							document.title = title;
 						});
 					}
-				);
+				},
+				managers: {
+					// 'DOM Element ID': { /* elFinder options of this DOM Element */ }
+					'elfinder': {}
+				}
 			});
 		</script>
+
+
 <?php
 	}
 	// Common Database Methods
@@ -99,6 +100,7 @@ class Template extends Model
 		$tpimg_favicon_logo = '';
 		if (isset($_REQUEST['submit'])) {
 			extract($_POST);
+			$r = Request::capture();
 			$data->sitename = $sitename;
 
 			if ($_FILES['logo']['size'] != 0) {
@@ -111,6 +113,13 @@ class Template extends Model
 			} elseif (isset($_POST['tpimg_favicon_logo'])) {
 				$data->favicon_logo = $_POST['tpimg_favicon_logo'];
 			}
+			if ($_FILES['site_map']['size'] != 0) {
+				$data->site_map = upload(SITE_ROOT, $_FILES['site_map']);
+			}
+			if ($_FILES['robots']['size'] != 0) {
+				$data->site_map = upload(SITE_ROOT, $_FILES['robots']);
+			}
+
 			$data->email = $email;
 			$data->meta_keywords = $meta_keywords;
 			$data->meta_description = $meta_description;
@@ -160,6 +169,8 @@ class Template extends Model
 		$data = self::find(1);
 		$impath = $data->path() . $data->logo;
 		$impath2 = $data->path() . $data->favicon_logo;
+		$site_map =  $data->site_map;
+		$robots =  $data->robots;
 		$sitename = $data->sitename;
 		$email = $data->email;
 		$favicon_logo = $data->favicon_logo;
@@ -193,6 +204,9 @@ class Template extends Model
 		echo $fo = Forms::textarea("Canonical", "canonical", $canonical, 0, 0);
 		echo $fo = Forms::textarea("Google Webmaster Code", "google_site_verification", $google_site_verification, 0, 0);
 
+		echo '<hr><h2 class="text-center">Upload Site Map And Robots</h2><hr>';
+		echo $fo = Forms::upload_file("Upload Site map", "site_map", $site_map);
+		echo $fo = Forms::upload_file("Robots ", "robots", $robots);
 		echo '<hr><h2 class="text-center">Open Graph Inforamtion</h2><hr>';
 
 		echo $fo = Forms::input("Og Title", "og_title", $og_title, 0, 0);

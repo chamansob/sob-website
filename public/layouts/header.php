@@ -73,12 +73,12 @@
       </ul>
       <ul class="navbar-item flex-row ml-md-auto">
         <li class="nav-item dropdown message-dropdown">
-          <a href="<?= BASE_PATH ?>" class="nav-link dropdown-toggle" id="messageDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
+          <a href="<?= BASE_PATH ?>" target="_blank" class="nav-link" id="messageDropdown" > <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
               <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
               <polyline points="9 22 9 12 15 12 15 22"></polyline>
             </svg> </a>
         </li>
-        <?php $user = User::findOrFail($_SESSION['user_id']);
+        <?php $user = User::find($_SESSION['user_id']);
 
         if (file_exists($_SERVER['DOCUMENT_ROOT'] . "/" . MYF . $user->path() . $user->avatar)) {
           $img = BASE_PATH . $user->path() . $user->avatar;

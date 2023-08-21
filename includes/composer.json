@@ -9,6 +9,8 @@
         "illuminate/validation": "^8.83",
         "illuminate/pagination": "^8.83",
         "fakerphp/faker": "^1.20",
-        "coderatio/simple-backup": "^1.0"		
+        "coderatio/simple-backup": "^1.0",
+        "phpmailer/phpmailer": "^6.8",
+        "illuminate/filesystem": "^8.83"		
     }
 }

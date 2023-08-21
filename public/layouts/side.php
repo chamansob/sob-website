@@ -38,7 +38,7 @@ $lead = Lead::count();
 
         </ul>
       </li>
-	    <li class="menu"> <a href="#lead" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+      <li class="menu"> <a href="#lead" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
           <div class=""> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users">
               <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
               <circle cx="9" cy="7" r="4"></circle>
@@ -52,8 +52,10 @@ $lead = Lead::count();
         <ul class="collapse submenu list-unstyled" id="lead" data-parent="#accordionExample">
           <li><a href="<?= TP_BACK_SIDE ?>lead/add">Add Lead</a></li>
           <li><a href="<?= TP_BACK_SIDE ?>lead/show">Show Lead(<?= $lead ?>)</a></li>
-        </ul
-      <li class="menu"> <a href="#app" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+		  
+         </ul>
+      </li> 
+	  <li class="menu"> <a href="#app" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
           <div class=""> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-cpu">
               <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
               <rect x="9" y="9" width="6" height="6"></rect>
@@ -302,7 +304,12 @@ $lead = Lead::count();
             </svg> <span>Site Settings</span> </div>
         </a>
       </li>
-
+      <li class="menu"> <a href="<?= TP_BACK_SIDE ?>filemanager" aria-expanded="false" class="dropdown-toggle">
+          <div class=""> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-book">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+            </svg> <span>File Manager</span> </div>
+        </a> </li>
     </ul>
   </nav>
 </div>

@@ -99,26 +99,27 @@ $og_image_alt = $site->og_image_alt;
 
                 <!-- logo -->
                 <div class="logo">
-                    <div class="logo-icon">
+                    <!-- <div class="logo-icon">
                         <img class="w-50" src="<?= BASE_PATH ?><?= $Template->path() . $Template->logo ?>" alt="<?= $temp->sitename ?>">
-                    </div>
+                    </div> -->
 
                 </div>
-                <div class="row h-100 align-content-center">
+                <div class="row h-0 align-content-center">
                     <div class="col-md-6 tab-100 order_2">
 
                         <!-- side text -->
-                        <div class="side-text">
+                        <!-- <div class="side-text">
                             <article>
-                                <?= $m->text ?>
+                               
                             </article>
 
-                            <!-- login sign up button -->
+                           
                             <div class="logSign">
-                                <button id="showlogin" type="button" class="active"> <?= $m->small_text ?></button>
+                                <button id="showlogin" type="button" class="active"> </button>
 
                             </div>
-                        </div>
+                        </div> -->
+                        
                     </div>
                     <div class="col-md-6 tab-100">
 
@@ -131,7 +132,7 @@ $og_image_alt = $site->og_image_alt;
                                     echo '<div class="alert alert-' . $dataReturn['type'] . '">' . $dataReturn['msg'] . '</div>';
                                     redirect_by_js('', 1000);
                                 } ?>
-                                Registration form
+                                Claim Your Website !
                             </h2>
 
                             <!-- login form -->
@@ -403,7 +404,7 @@ $og_image_alt = $site->og_image_alt;
                                     </label>
                                 </div>
                                 <div class="login-btn">
-                                    <button type="submit" name="submit" class="login">Submit</button>
+                                    <button type="submit" name="submit" class="login">Get Started</button>
                                 </div>
                             </form>
 
@@ -415,9 +416,9 @@ $og_image_alt = $site->og_image_alt;
                                 </div>
                                 <div class="social-signup">
                                     <?php
-                                    $socials = Social::all();
+                                    $socials = Social::where('status', 0)->get();
                                     foreach ($socials as $social) {
-                                        echo ' <a class="' . strtolower($social->title) . '" href="#"><i class="fa-brands fa-' . strtolower($social->class) . '"></i></a>';
+                                        echo ' <a class="' . strtolower($social->title) . '" href="' . ($social->url) . '"><i class="fa-brands fa-' . strtolower($social->class) . '"></i></a>';
                                     }
                                     ?>
                                 </div>

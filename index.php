@@ -17,7 +17,7 @@ include_layout_web('header.php');
 
 
 <!--Live Section-->
-<?php // include_layout_web('home/live.php'); 
+<?php include_layout_web('home/live.php');
 ?>
 
 
@@ -28,9 +28,7 @@ include_layout_web('header.php');
 <?php include_layout_web('home/funfacts.php'); ?>
 <!-- End Funfacts Section -->
 
-<!-- Trusted Section -->
-<?php //include_layout_web('home/trust.php'); 
-?>
+
 
 <!-- Team Section -->
 <?php // include_layout_web('home/team.php'); 
@@ -47,7 +45,10 @@ include_layout_web('header.php');
 <?php // include_layout_web('home/agency.php'); 
 ?>
 <!-- Testimonial Section -->
-<?php include_layout_web('home/testimonial.php'); ?>
+<?php include_layout_web('home/testimonial3.php'); ?>
+<!-- Trusted Section -->
+<?php  include_layout_web('home/trust.php');
+?>
 <!-- News Section -->
 <?php include_layout_web('home/news.php'); ?>
 <!--Sponsors Section-->

@@ -23,7 +23,7 @@
  <script src="<?= TP_BACK ?>bootstrap/js/bootstrap.min.js"></script>
  <script src="<?= TP_BACK ?>plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
  <script src="<?= TP_BACK ?>assets/js/app.js"></script>
-
+ 
  <script>
      $(document).ready(function() {
          App.init();
@@ -34,7 +34,7 @@
  <!-- END GLOBAL MANDATORY SCRIPTS -->
  <script>
      $(document).ready(function() {
-    
+
          $('#zero-config').DataTable({
              "dom": "<'dt--top-section'<'row'<'col-12 col-sm-6 d-flex justify-content-sm-start justify-content-center'l><'col-12 col-sm-6 d-flex justify-content-sm-end justify-content-center mt-sm-0 mt-3'f>>>" +
                  "<'table-responsive'tr>" +

@@ -253,25 +253,25 @@ function upload($path, $fname)
   $nns = rand(5, 8522166);
   $image = $fname["name"];
   $name = explode(".", $image);
-  $newfile = $name[0] . '_' . $nns . '.' . $name[1];
+  $newfile = $fname["name"];
   if (file_exists($path)) {
   } else {
     mkdir($path, 0700);
   }
-  $target_file = $path . $newfile;
+  $target_file = $path .DS. $newfile;
   $uploadOk = 1;
   $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
 
   // Check if image file is a actual image or fake image
   if (isset($_POST["submit"])) {
-    $check = getimagesize($fname["tmp_name"]);
-    if ($check !== false) {
-      //  echo "File is an image - " . $check["mime"] . ".";
-      $uploadOk = 1;
-    } else {
-      echo "File is not an image.";
-      $uploadOk = 0;
-    }
+    // $check = getimagesize($fname["tmp_name"]);
+    // if ($check !== false) {
+    //     echo "File is an image - " . $check["mime"] . ".";
+    //   $uploadOk = 1;
+    // } else {
+    //   echo "File is not an image.";
+    //   $uploadOk = 0;
+    // }
   }
   // Check if file already exists
   if (file_exists($target_file)) {
@@ -291,8 +291,8 @@ function upload($path, $fname)
   }
   // Allow certain file formats
   if (
-    $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-    && $imageFileType != "gif"
+    $imageFileType != "xml"
+    && $imageFileType != "txt"
   ) {
     echo '<div class="alert alert-danger">
   <strong>Warning!</strong> Sorry, only JPG, JPEG, PNG & GIF files are allowed.
@@ -300,6 +300,7 @@ function upload($path, $fname)
 </div>';
     $uploadOk = 0;
   }
+  
   // Check if $uploadOk is set to 0 by an error
   if ($uploadOk == 0) {
 
@@ -308,6 +309,7 @@ function upload($path, $fname)
 </div>';
     // if everything is ok, try to upload file
   } else {
+    echo $target_file;
     if (move_uploaded_file($fname["tmp_name"], $target_file)) {
       /*   echo '
 		<div class="alert alert-success">

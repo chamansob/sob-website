@@ -1,51 +1,21 @@
-<section class="trusted-section trusted-section__dark">
-    <div class="auto-container">
-        <div class="outer-container">
-            <div class="row clearfix">
-                <div class="left-col col-xl-5 col-lg-6 col-md-12 col-sm-12">
-                    <div class="inner">
-                        <div class="col-header">
-                            <div class="header-inner">
-                                <span>We’re Committed To Deliver High Quality Projects .</span>
-                            </div>
-                        </div>
-                        <div class="features">
-                            <div class="feature">
-                                <div class="count"><span>01</span></div>
-                                <h5>TOTAL DESIGN FREEDOM FOR EVERYONE</h5>
-                                <div class="sub-text">core features</div>
-                            </div>
-                            <div class="feature">
-                                <div class="count"><span>02</span></div>
-                                <h5>BASIC RULES OF RUNNING WEB AGENCY</h5>
-                                <div class="sub-text">core features</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="right-col col-xl-7 col-lg-6 col-md-12 col-sm-12">
-                    <div class="inner">
-                        <div class="sec-title">
-                            <h2>We’re trusted by more <br>than 6260 clients<span class="dot">.</span></h2>
-                            <div class="lower-text">There are many variations of passages of Lorem Ipsum
-                                available, but the majority have suffered alteration in some form, simply free
-                                text by injected humour, or randomised.</div>
-                        </div>
-                        <div class="featured-block-two clearfix">
-                            <div class="image"><img src="<?= BASE_PATH ?>asstes/images/resource/featured-image-5.jpg" alt=""></div>
-                            <div class="text">
-                                <ul>
-                                    <li> Suspe ndisse sagittis leo.</li>
-                                    <li>Entum estibulum is posuere.</li>
-                                    <li>If you are going to use passage.</li>
-                                    <li>Lorem Ipsum on the tend to repeat.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<section class="about-six bg-dark pb-5">
 
-            </div>
-        </div>
-    </div>
+
+    <div class="auto-container">
+        <div class="row">
+            <div class="col-md-12 col-lg-12">
+                <div class="about-six__content">
+                    <div class="sec-title-six">
+                        <p class="sec-title-six__text"><span>Our Company Benefits</span></p>
+                        <!-- /.sec-title-six__text -->
+                        <h2 class="sec-title-six__title text-white">How do you know if your SEO Company is doing a good job? Here's how to find out.</h2>
+                        <!-- /.sec-title-six__title -->
+                    </div><!-- /.sec-title-six -->
+                    <div class="about-six__text"><strong>One of the most searched questions on SEO:</strong> how to know whether your SEO company is doing the right work? Given SEO results take time to yield, it can be a little tricky to understand what your SEO company is doing for you. For some companies, even three months can be less time to rank higher. Does this mean you shouldn't ask them what they're doing? Absolutely not! In fact, our first approach with our clients is to give them a 360-degree view of where their website currently stands and what deliverables we can provide them in the next 2 to 3 months based on their requirements and goals. This also means we get down to the nitty-gritty of your business and might take over partial control of your CMS, Google Analytics, Webmaster Tool, and more. We do not gurantee you of top rankings within a month or two as SEO work relies on search engine alogorithms that can change overnight. We assure better quality baclinks, content, profiles and everything else that leads to higher ranking with right keywords and white hat techniques.</div><!-- /.about-six__text -->
+                </div><!-- /.about-six__content -->
+            </div><!-- /.col-md-12 col-lg-5 -->
+
+        </div><!-- /.row -->
+
+    </div><!-- /.auto-container -->
 </section>

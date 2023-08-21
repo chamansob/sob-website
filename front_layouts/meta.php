@@ -26,12 +26,3 @@
 <meta property="article:modified_time" content="<?= $article_modified_time ?>" />
 <meta property="og:image" content="<?= $og_image ?>" />
 <meta property="og:image_alt" content="<?= $og_image_alt ?>" />
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-267284942-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-267284942-1');
-</script>

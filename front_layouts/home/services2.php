@@ -37,7 +37,7 @@ foreach ($services as $service) {
             <div class="skill-section__wrapper clearfix">
                 <div class="skill-section__left">
                     <div class="skill-section__content-box">
-                        <div class="text-content">
+                        <div class="text-content pt-4">
                             <h3 class="text-theme"><?= ($service->service_title) ?></h3>
                             <?= ($service->front_text) ?>
                             <div class="text clearfix">

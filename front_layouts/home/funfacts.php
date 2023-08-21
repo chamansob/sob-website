@@ -1,6 +1,6 @@
 <section class="facts-section jarallax" data-jarallax data-speed="0.3" data-imgPosition="50% 80%">
     <!-- <div class="image-layer" style="background-image: url(images/background/image-1.jpg);"></div> -->
-    <img src="<?= BASE_PATH ?>asstes/images/background/image-1.jpg" alt="" class="jarallax-img">
+    <img src="<?= BASE_PATH ?>asstes/images/background/image-1.webp" alt="" class="jarallax-img">
     <div class="auto-container">
         <div class="inner-container">
 

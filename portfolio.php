@@ -3,7 +3,7 @@ include_layout_web('header.php');
 ?>
     <!-- Banner Section -->
     <section class="page-banner">
-        <div class="image-layer" style="background-image:url(<?= BASE_PATH ?>asstes/images/background/image-7.jpg);"></div>
+        <div class="image-layer" style="background-image:url(<?= BASE_PATH ?>asstes/images/background/image-7.webp);"></div>
         <div class="shape-1"></div>
         <div class="shape-2"></div>
         <div class="banner-inner">

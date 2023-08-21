@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+https://www.seooutofthebox.com/sitemap.xml
